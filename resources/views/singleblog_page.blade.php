@@ -36,20 +36,48 @@
   </section>
   <section class="pt-4">
     <div class="container">
-        <h2 class="text-center pb-1">Blog site</h2>
-        <div class="row g-4">
-            @foreach($blogPost as $blog)
-            <div class="col-md-4 col-lg-4 col-xl-4 col-12 col-sm-12">
-                <div class="blog-info">
-                    <a href="{{route('single.blog',$blog->slug)}}"> <img src="{{asset($blog->image)}}" alt="" style="width: 100%; height: 300px;">
-                    </a>
-                    <div class="blog-footer text-center">
-                        <h3><a href="{{route('single.blog',$blog->slug)}}">{{Str::words($blog->title, 5, ' ...')}}</a></h3>
-                        <p>{{$blog->created_at->format('M d,y-  h:iA')}}</p>
+        <h2 class="text-center pb-1">{{$blog->title}}</h2>
+        <div class="py-4">
+            <img src="{{asset($blog->image)}}" alt="" width="100%">
+        </div>
+        <p>{!!$blog->text_content!!}</p>
+      
+    </div>
+  </section>
+  <section class="py-2" style="border-top:1px solid #ddd ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-xl-5 col-lg-5 col-12">
+                <form action="{{route('store.comment')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group pb-1">
+                        <label for="title">Blog Title</label>
+                        <input type="text" name="title" value="{{$blog->title}}" class="form-control">
+                        @error('title')
+                            <p class="text-danger ">{{$message}}</p>
+                        @enderror
                     </div>
-                </div>
+                    <div class="form-group pb-3">
+                        <label for="image">Blog Image</label>
+                        <input type="file" name="image" class="form-control" id="">
+                        @error('image')
+                        <p class="text-danger ">{{$message}}</p>
+                        @enderror
+                        <img src="{{asset($blog->image)}}" alt="" style="width: 200px; margin: 5px 0;">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Blog content</label>
+                        <textarea name="content" class="form-control" id="editor" cols="30" rows="10" style="height: 300px">
+                            {{$blog->text_content}}
+                        </textarea>
+                        @error('content')
+                        <p class="text-danger ">{{$message}}</p>
+                    @enderror
+                    </div>
+                    <button class="btn btn-lg btn-success mt-3">Submit</button>
+                </form>
             </div>
-            @endforeach
+            <div class="col-md-7 col-xl-7 col-lg-7 col-12"></div>
         </div>
     </div>
   </section>
