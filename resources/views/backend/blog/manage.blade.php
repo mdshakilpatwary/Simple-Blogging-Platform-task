@@ -52,7 +52,7 @@
             @foreach ($blogs as $blog)
             <tr>
                 <td>{{$sl++}}</td>
-                <td>{{$blog->title}}</td>
+                <td><a href="{{route('single.blog',$blog->slug)}}">{{$blog->title}}</a></td>
                 <td><img src="{{asset($blog->image)}}" alt="" width="30"></td>
                 <td>{{$blog->created_at->format('M d,y-  h:iA')}}</td>
                 <td>
@@ -71,7 +71,7 @@
             @foreach ($userBlogs as $blog)
             <tr>
                 <td>{{$sl++}}</td>
-                <td>{{$blog->title}}</td>
+                <td><a href="{{route('single.blog',$blog->slug)}}">{{$blog->title}}</a></td>
                 <td><img src="{{asset($blog->image)}}" alt="" width="30"></td>
                 <td>{{$blog->created_at->format('M d,y-  h:iA')}}</td>
                 <td>

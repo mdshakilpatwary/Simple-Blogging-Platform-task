@@ -51,6 +51,40 @@
             </div>
             @endforeach
         </div>
+        <hr>
+        <div class="blog-filter pt-4" style="display: flex; justify-content:space-around;">
+            <span class="store-qty" style="padding:0 10px; font-size: 20px">Showing {{ $blogPost->firstItem() }} - {{ $blogPost->lastItem() }} Blog</span>
+            
+            <div class="">
+                <div class="custom-pagination text-center">
+                    <div class="pagination" >
+                        {{-- Previous Page Link --}}
+                        @if ($blogPost->onFirstPage())
+                            <span class="disabled" style="padding:0 10px; font-size: 20px">Previous</span>
+                        @else
+                            <a href="{{ $blogPost->previousPageUrl() }}" style="padding:0 10px; font-size: 20px" rel="prev">Previous</a>
+                        @endif
+                
+                        {{-- Pagination Elements --}}
+                        @for ($i = 1; $i <= $blogPost->lastPage(); $i++)
+                            @if ($i == $blogPost->currentPage())
+                                <span class="current" style="padding:0 5px; font-size: 20px">{{ $i }}</span>
+                            @else
+                                <a href="{{ $blogPost->url($i) }}" style="padding:0 5px; font-size: 20px">{{ $i }}</a>
+                            @endif
+                        @endfor
+                
+                        {{-- Next Page Link --}}
+                        @if ($blogPost->hasMorePages())
+                            <a href="{{ $blogPost->nextPageUrl() }}" rel="next" style="padding:0 10px; font-size: 20px">Next</a>
+                        @else
+                            <span class="disabled" style="padding:0 10px; font-size: 20px">Next</span>
+                        @endif
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
   </section>
 
