@@ -10,7 +10,8 @@
 7.npm run dev
 8.php artisan serve
 9.php artisan migrate
-10.php artisan db:seed 
+10.php artisan db:seed
+11.php artisan optimize
 
 
 #### admin login information
