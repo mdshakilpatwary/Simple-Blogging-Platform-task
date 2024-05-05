@@ -93,19 +93,20 @@
             </div>
             <div class="col-md-7 col-xl-7 col-lg-7 col-12">
                 <div class="comment-data">
-                    <h4>all comment {{count($comments)}}</h4>
+                       <h4>all comment ({{count($comments)}})</h4>
                     <table class="table">
                         @foreach($comments as $comment)
                         <tr>
                             <td>{{$comment->comment}}</td>
                             <td>{{$comment->created_at->format('d,y-  h:iA')}}</td>
+                            @if(Auth::user())
                             <td>
                                 @if(Auth::user()->id == $comment->user_id)
                                 <a href="{{route('delete.comment',$comment->id)}}" class="btn btn-sm btn-danger">delete</a>
-                                @else
-                                <span>noDelete</span>
                                 @endif
                             </td>
+                            @endif
+                        
                         </tr>
                         @endforeach
                     </table>
